@@ -4,6 +4,7 @@ package sshkeys
 
 import (
 	context "context"
+	fmt "fmt"
 	fluidstackgosdk "github.com/fluidstackio/fluidstack-go-sdk"
 	core "github.com/fluidstackio/fluidstack-go-sdk/core"
 	internal "github.com/fluidstackio/fluidstack-go-sdk/internal"
@@ -59,6 +60,9 @@ func (c *Client) List(
 		c.header.Clone(),
 		options.ToHeader(),
 	)
+	if request.ApiKey != nil {
+		headers.Add("api-key", fmt.Sprintf("%v", *request.ApiKey))
+	}
 	errorCodes := internal.ErrorCodes{
 		401: func(apiError *core.APIError) error {
 			return &fluidstackgosdk.UnauthorizedError{
@@ -113,6 +117,9 @@ func (c *Client) Create(
 		c.header.Clone(),
 		options.ToHeader(),
 	)
+	if request.ApiKey != nil {
+		headers.Add("api-key", fmt.Sprintf("%v", *request.ApiKey))
+	}
 	headers.Set("Content-Type", "application/json")
 	errorCodes := internal.ErrorCodes{
 		401: func(apiError *core.APIError) error {
@@ -152,6 +159,7 @@ func (c *Client) Create(
 func (c *Client) Delete(
 	ctx context.Context,
 	sshKeyName string,
+	request *fluidstackgosdk.SshKeysDeleteRequest,
 	opts ...option.RequestOption,
 ) (interface{}, error) {
 	options := core.NewRequestOptions(opts...)
@@ -168,6 +176,9 @@ func (c *Client) Delete(
 		c.header.Clone(),
 		options.ToHeader(),
 	)
+	if request.ApiKey != nil {
+		headers.Add("api-key", fmt.Sprintf("%v", *request.ApiKey))
+	}
 	errorCodes := internal.ErrorCodes{
 		401: func(apiError *core.APIError) error {
 			return &fluidstackgosdk.UnauthorizedError{

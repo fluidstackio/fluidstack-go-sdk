@@ -10,6 +10,7 @@ import (
 )
 
 type CreateInstanceRequest struct {
+	ApiKey *string `json:"-" url:"-"`
 	// The custom name of the instance.
 	Name *string `json:"name,omitempty" url:"-"`
 	// The GPU type of the instance.
@@ -26,10 +27,27 @@ type CreateInstanceRequest struct {
 	Volumes []*VolumeInstanceResponse `json:"volumes,omitempty" url:"-"`
 }
 
+type InstancesDeleteRequest struct {
+	ApiKey *string `json:"-" url:"-"`
+}
+
+type InstancesGetRequest struct {
+	ApiKey *string `json:"-" url:"-"`
+}
+
 type InstancesListRequest struct {
-	Page *int `json:"-" url:"page,omitempty"`
+	ApiKey *string `json:"-" url:"-"`
+	Page   *int    `json:"-" url:"page,omitempty"`
 	// Include failed instances. Default is False.
 	IncludeFailedInstances *bool `json:"-" url:"include_failed_instances,omitempty"`
+}
+
+type InstancesStartRequest struct {
+	ApiKey *string `json:"-" url:"-"`
+}
+
+type InstancesStopRequest struct {
+	ApiKey *string `json:"-" url:"-"`
 }
 
 type ConfigurationInstanceResponse struct {

@@ -4,6 +4,7 @@ package instances
 
 import (
 	context "context"
+	fmt "fmt"
 	fluidstackgosdk "github.com/fluidstackio/fluidstack-go-sdk"
 	core "github.com/fluidstackio/fluidstack-go-sdk/core"
 	internal "github.com/fluidstackio/fluidstack-go-sdk/internal"
@@ -59,6 +60,9 @@ func (c *Client) List(
 		c.header.Clone(),
 		options.ToHeader(),
 	)
+	if request.ApiKey != nil {
+		headers.Add("api-key", fmt.Sprintf("%v", *request.ApiKey))
+	}
 	errorCodes := internal.ErrorCodes{
 		401: func(apiError *core.APIError) error {
 			return &fluidstackgosdk.UnauthorizedError{
@@ -111,6 +115,9 @@ func (c *Client) Create(
 		c.header.Clone(),
 		options.ToHeader(),
 	)
+	if request.ApiKey != nil {
+		headers.Add("api-key", fmt.Sprintf("%v", *request.ApiKey))
+	}
 	headers.Set("Content-Type", "application/json")
 	errorCodes := internal.ErrorCodes{
 		401: func(apiError *core.APIError) error {
@@ -152,6 +159,7 @@ func (c *Client) Create(
 func (c *Client) Get(
 	ctx context.Context,
 	instanceId string,
+	request *fluidstackgosdk.InstancesGetRequest,
 	opts ...option.RequestOption,
 ) (*fluidstackgosdk.InstanceResponse, error) {
 	options := core.NewRequestOptions(opts...)
@@ -168,6 +176,9 @@ func (c *Client) Get(
 		c.header.Clone(),
 		options.ToHeader(),
 	)
+	if request.ApiKey != nil {
+		headers.Add("api-key", fmt.Sprintf("%v", *request.ApiKey))
+	}
 	errorCodes := internal.ErrorCodes{
 		401: func(apiError *core.APIError) error {
 			return &fluidstackgosdk.UnauthorizedError{
@@ -205,6 +216,7 @@ func (c *Client) Get(
 func (c *Client) Delete(
 	ctx context.Context,
 	instanceId string,
+	request *fluidstackgosdk.InstancesDeleteRequest,
 	opts ...option.RequestOption,
 ) (interface{}, error) {
 	options := core.NewRequestOptions(opts...)
@@ -221,6 +233,9 @@ func (c *Client) Delete(
 		c.header.Clone(),
 		options.ToHeader(),
 	)
+	if request.ApiKey != nil {
+		headers.Add("api-key", fmt.Sprintf("%v", *request.ApiKey))
+	}
 	errorCodes := internal.ErrorCodes{
 		401: func(apiError *core.APIError) error {
 			return &fluidstackgosdk.UnauthorizedError{
@@ -258,6 +273,7 @@ func (c *Client) Delete(
 func (c *Client) Stop(
 	ctx context.Context,
 	instanceId string,
+	request *fluidstackgosdk.InstancesStopRequest,
 	opts ...option.RequestOption,
 ) (*fluidstackgosdk.ListInstanceResponse, error) {
 	options := core.NewRequestOptions(opts...)
@@ -274,6 +290,9 @@ func (c *Client) Stop(
 		c.header.Clone(),
 		options.ToHeader(),
 	)
+	if request.ApiKey != nil {
+		headers.Add("api-key", fmt.Sprintf("%v", *request.ApiKey))
+	}
 	errorCodes := internal.ErrorCodes{
 		401: func(apiError *core.APIError) error {
 			return &fluidstackgosdk.UnauthorizedError{
@@ -311,6 +330,7 @@ func (c *Client) Stop(
 func (c *Client) Start(
 	ctx context.Context,
 	instanceId string,
+	request *fluidstackgosdk.InstancesStartRequest,
 	opts ...option.RequestOption,
 ) (*fluidstackgosdk.ListInstanceResponse, error) {
 	options := core.NewRequestOptions(opts...)
@@ -327,6 +347,9 @@ func (c *Client) Start(
 		c.header.Clone(),
 		options.ToHeader(),
 	)
+	if request.ApiKey != nil {
+		headers.Add("api-key", fmt.Sprintf("%v", *request.ApiKey))
+	}
 	errorCodes := internal.ErrorCodes{
 		401: func(apiError *core.APIError) error {
 			return &fluidstackgosdk.UnauthorizedError{

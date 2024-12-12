@@ -4,6 +4,7 @@ package configurations
 
 import (
 	context "context"
+	fmt "fmt"
 	fluidstackgosdk "github.com/fluidstackio/fluidstack-go-sdk"
 	core "github.com/fluidstackio/fluidstack-go-sdk/core"
 	internal "github.com/fluidstackio/fluidstack-go-sdk/internal"
@@ -38,6 +39,7 @@ func NewClient(opts ...option.RequestOption) *Client {
 // List available configurations including GPU type, GPU count, RAM size, and disk size.
 func (c *Client) List(
 	ctx context.Context,
+	request *fluidstackgosdk.ConfigurationsListRequest,
 	opts ...option.RequestOption,
 ) ([]*fluidstackgosdk.ConfigurationResponse, error) {
 	options := core.NewRequestOptions(opts...)
@@ -51,6 +53,9 @@ func (c *Client) List(
 		c.header.Clone(),
 		options.ToHeader(),
 	)
+	if request.ApiKey != nil {
+		headers.Add("api-key", fmt.Sprintf("%v", *request.ApiKey))
+	}
 	errorCodes := internal.ErrorCodes{
 		401: func(apiError *core.APIError) error {
 			return &fluidstackgosdk.UnauthorizedError{

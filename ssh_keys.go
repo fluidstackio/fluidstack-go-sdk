@@ -9,13 +9,19 @@ import (
 )
 
 type CreateSshKeyRequest struct {
+	ApiKey *string `json:"-" url:"-"`
 	// The name of the SSH key.
 	Name string `json:"name" url:"-"`
 	// The public key of the SSH key.
 	PublicKey string `json:"public_key" url:"-"`
 }
 
+type SshKeysDeleteRequest struct {
+	ApiKey *string `json:"-" url:"-"`
+}
+
 type SshKeysListRequest struct {
+	ApiKey *string `json:"-" url:"-"`
 	// Show all SSH keys
 	ShowAll *bool `json:"-" url:"show_all,omitempty"`
 }

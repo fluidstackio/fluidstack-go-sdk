@@ -8,6 +8,10 @@ import (
 	internal "github.com/fluidstackio/fluidstack-go-sdk/internal"
 )
 
+type ConfigurationsListRequest struct {
+	ApiKey *string `json:"-" url:"-"`
+}
+
 type ConfigurationResponse struct {
 	// The GPU type of the configuration.
 	GpuType GpuType `json:"gpu_type" url:"gpu_type"`

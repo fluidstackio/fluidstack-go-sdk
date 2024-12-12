@@ -8,6 +8,10 @@ import (
 	internal "github.com/fluidstackio/fluidstack-go-sdk/internal"
 )
 
+type TemplatesListRequest struct {
+	ApiKey *string `json:"-" url:"-"`
+}
+
 type OperatingSystemResponse struct {
 	// The friendly name of the operating system.
 	Name string `json:"name" url:"name"`
